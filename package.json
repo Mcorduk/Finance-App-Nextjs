@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "npm run docker:up && next dev",
-    "build": "prisma generate && prisma migrate deploy && next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:generate": "prisma generate",
-    "postinstall": "prisma generate"
+    "prisma:migrate": "dotenv -e .env.local -- prisma migrate dev",
+    "prisma:generate": "dotenv -e .env.local -- prisma generate",
+    "postinstall": "prisma generate",
+    "dev:local": "dotenv -e .env.local -- next dev"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
@@ -37,6 +38,7 @@
     "@types/node": "22.7.5",
     "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^8.48.0",
     "eslint-config-next": "14.2.15",
     "postcss": "^8.4.24",
